@@ -1,20 +1,21 @@
 # Makefile to compile NetBSD csu for VE
 
+SRCDIR=.
+
 MKPIC=yes
 MACHINE_ARCH=ve
-ARCHDIR=arch/ve
+ARCHDIR=${SRCDIR}/arch/ve
 OBJCOPY=cp
 MKSTRIPIDENT=no
 TARGET=ve-linux
 CLANG=clang
 CC=${CLANG} -target $(TARGET) -O
 
-# DEST?=/opt/nec/nosupport/llvm/lib/clang/8.0.0/lib/linux/ve
 DEST?=dest
 
 PICFLAGS ?= -fPIC
 
-COMMON_DIR:=	./common
+COMMON_DIR:=	${SRCDIR}/common
 VPATH =		${COMMON_DIR}:${ARCHDIR}
 
 CPPFLAGS+=	-I${NETBSDSRCDIR}/libexec/ld.elf_so -I${COMMON_DIR} -I${ARCHDIR}
